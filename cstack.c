@@ -65,3 +65,19 @@ void stack_free(const hstack_t hstack)
     stack_free(hstack);
 }
 */
+
+// while
+void stack_free(const hstack_t hstack)
+{
+
+    while ((stack_valid_handler(hstack) == 0)          //
+           && (descriptor_table[hstack]->top != NULL)) //
+    {
+        descriptor_table[hstack]->node_count--;
+        node_t *ptrPrev = descriptor_table[hstack]->top->prev;
+
+        free(descriptor_table[hstack]->top);
+        descriptor_table[hstack]->top = ptrPrev;
+    }
+    return;
+}
