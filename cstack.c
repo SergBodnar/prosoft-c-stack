@@ -94,3 +94,15 @@ int stack_valid_handler(const hstack_t hstack)
         return 1;
     }
 }
+
+unsigned int stack_size(const hstack_t hstack)
+{
+    if (stack_valid_handler(hstack) == 0)
+    {
+        return descriptor_table[hstack]->node_count;
+    }
+    else
+    {
+        return 0;
+    }
+}
