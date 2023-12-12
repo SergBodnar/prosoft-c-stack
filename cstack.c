@@ -130,3 +130,22 @@ void stack_push(const hstack_t hstack, const void *data_in, const unsigned int s
         descriptor_table[hstack]->node_count++;
     }
 }
+
+unsigned int stack_pop(const hstack_t hstack, void *data_out, const unsigned int size)
+{
+    if ((stack_valid_handler(hstack) == 0)               //
+        && (descriptor_table[hstack]->node_count > 0)    //
+        && (size >= descriptor_table[hstack]->top->size) //
+        && (data_out != NULL))
+    {
+        node_t *ptr_top = descriptor_table[hstack]->top;
+
+        descriptor_table[hstack]->top = ptr_top->prev;
+        memcpy(data_out, ptr_top->data, ptr_top->size);
+        free(ptr_top);
+        ptr_top = NULL;
+        descriptor_table[hstack]->node_count--;
+        return ptr_top->size;
+    }
+    return 0;
+}
