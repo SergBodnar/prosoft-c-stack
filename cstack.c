@@ -1,42 +1,41 @@
+/*
+Школа ПРОСОФТ 2023.
+Задание.
+В файле cstack.h определен интерфейс (API) в виде набора прототипов функций.
+Необходимо реализовать эти функции.
+Библиотека предназначен для реализации стека в учебных целях.
+
+Функция void stack_free(const hstack_t hstack) выполнена в двух вариантах:
+1. рекурсия
+2. цикл while
+
+https://github.com/SergBodnar/prosoft-c-stack
+
+Сергей Боднар.
+*/
+
 #include "cstack.h"
 #include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 
-#define UNUSED(VAR) (void)(VAR)
+#define STACKCOUNT 20
 
-hstack_t stack_new(void)
+int stack_descriptor_id = -1;
+
+typedef struct node
 {
-    return -1;
-}
+    struct node *prev;
+    unsigned int size;
+    char data[0];
+} node_t;
 
-void stack_free(const hstack_t hstack)
+typedef struct stack_descriptor
 {
-    UNUSED(hstack);
-}
+    struct node *top;
+    int node_count;
+    int id;
 
-int stack_valid_handler(const hstack_t hstack)
-{
-    UNUSED(hstack);
-    return 1;
-}
+} stack_descriptor_t;
 
-unsigned int stack_size(const hstack_t hstack)
-{
-    UNUSED(hstack);
-    return 0;
-}
-
-void stack_push(const hstack_t hstack, const void* data_in, const unsigned int size)
-{
-    UNUSED(hstack);
-    UNUSED(data_in);
-    UNUSED(size);
-}
-
-unsigned int stack_pop(const hstack_t hstack, void* data_out, const unsigned int size)
-{
-    UNUSED(hstack);
-    UNUSED(data_out);
-    UNUSED(size);
-    return 0;
-}
-
+stack_descriptor_t *descriptor_table[STACKCOUNT];
