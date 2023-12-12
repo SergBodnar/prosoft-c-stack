@@ -39,3 +39,10 @@ typedef struct stack_descriptor
 } stack_descriptor_t;
 
 stack_descriptor_t *descriptor_table[STACKCOUNT];
+
+hstack_t stack_new()
+{
+    descriptor_table[stack_descriptor_id + 1]->id = stack_descriptor_id;
+    descriptor_table[stack_descriptor_id]->top = NULL;
+    return (stack_descriptor_id);
+}
