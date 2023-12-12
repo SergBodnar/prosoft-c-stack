@@ -46,3 +46,22 @@ hstack_t stack_new()
     descriptor_table[stack_descriptor_id]->top = NULL;
     return (stack_descriptor_id);
 }
+
+// рекурсия
+/*
+void stack_free(const hstack_t hstack)
+{
+
+    if ((stack_valid_handler(hstack) == 1)          //
+        || (descriptor_table[hstack]->top == NULL)) //
+    {
+        return;
+    }
+    descriptor_table[hstack]->node_count--;
+    node_t *ptr_prev = descriptor_table[hstack]->top->prev;
+
+    free(descriptor_table[hstack]->top);
+    descriptor_table[hstack]->top = ptr_prev;
+    stack_free(hstack);
+}
+*/
