@@ -106,3 +106,27 @@ unsigned int stack_size(const hstack_t hstack)
         return 0;
     }
 }
+
+void stack_push(const hstack_t hstack, const void *data_in, const unsigned int size)
+{
+
+    if ((stack_valid_handler(hstack) == 0) //
+        && (data_in != NULL)               //
+        && (size > 0))                     //
+    {
+
+        node_t *ptr_node = (node_t *)malloc(sizeof(node_t) + sizeof(char) * size);
+
+        if (ptr_node == NULL)
+        {
+            return;
+        }
+
+        ptr_node->prev = descriptor_table[hstack]->top;
+        ptr_node->size = size;
+        memcpy(ptr_node->data, data_in, size);
+
+        descriptor_table[hstack]->top = ptr_node;
+        descriptor_table[hstack]->node_count++;
+    }
+}
