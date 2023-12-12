@@ -81,3 +81,16 @@ void stack_free(const hstack_t hstack)
     }
     return;
 }
+
+int stack_valid_handler(const hstack_t hstack)
+{
+    if ((hstack <= stack_descriptor_id) //
+        && (hstack >= 0))               //
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
